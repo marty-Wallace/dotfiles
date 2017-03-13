@@ -80,8 +80,7 @@ set showcmd
 
 " Enable code folding
 set foldmethod=indent
-set foldlevel=99
-" Enabling space bar for code folding
+" Enabling tab for code folding
 nnoremap <tab> za
 
 " Enable running the current python script with F9 
@@ -118,7 +117,18 @@ nnoremap <leader>b :call Browser()<CR>
 nnoremap <leader>p :call PasteToggle()<CR>
 
 
+"Set triple leader to save and quit
 nnoremap <leader><leader><leader> :wq<CR>
+
+
+"Set backspace in Visual mode to delete selection
+vnoremap <BS> d
+
+
+" Make indenting and unindenting in visual mode retain the selection so
+" you don't have to re-select or type gv every time.
+vnoremap > ><CR>gv
+vnoremap < <<CR>gv
 
 " Enable switching between screens with Ctrl+[hjkl] 
 nnoremap <C-J> <C-W><C-J>
@@ -134,3 +144,15 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 "allow more backspacing freedom
 set backspace=indent,eol,start
+
+"Strong encryption
+set cm=blowfish
+
+"Highlight current line
+set cursorline
+
+"When page starts to scroll, keep the cursor 4 lines from the top and 8 
+"lines from the bottom
+set scrolloff=4
+
+
