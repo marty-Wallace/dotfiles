@@ -82,7 +82,7 @@ set showcmd
 set foldmethod=indent
 set foldlevel=99
 " Enabling space bar for code folding
-nnoremap <space> za
+nnoremap <tab> za
 
 " Enable running the current python script with F9 
 autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
@@ -116,6 +116,9 @@ endfunction
 "Map my functions
 nnoremap <leader>b :call Browser()<CR>
 nnoremap <leader>p :call PasteToggle()<CR>
+
+
+nnoremap <leader><leader><leader> :wq<CR>
 
 " Enable switching between screens with Ctrl+[hjkl] 
 nnoremap <C-J> <C-W><C-J>
