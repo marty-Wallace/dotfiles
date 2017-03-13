@@ -1,6 +1,9 @@
 " Improved vimrc file with plugins using the Vundle package manager
 " Author: <Martin Wallace, Martin.V.Wallace@ieee.org>
 
+"set leader key
+let mapleader=' '
+
 " removes backwards compatibily with vi
 set nocompatible
 
@@ -85,6 +88,35 @@ nnoremap <space> za
 autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 
+"{ Open up a URL in firefox
+function! Browser ()
+   let line = getline (".")
+   let line = matchstr (line, "http[^   ]*")
+   exec "!firefox ".line
+endfunction
+
+"}
+
+let paste_mode = 0
+"{ Toggle paste mode 
+function! PasteToggle()
+    if g:paste_mode == 0
+        set paste
+        let g:paste_mode = 1
+    else
+        set nopaste
+        let g:paste_mode = 0
+    endif
+    return
+endfunction
+"}
+
+
+
+"Map my functions
+nnoremap <leader>b :call Browser()<CR>
+nnoremap <leader>p :call PasteToggle()<CR>
+
 " Enable switching between screens with Ctrl+[hjkl] 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -97,3 +129,5 @@ map <C-n> :NERDTreeToggle<CR>
 " Close vim if only window open is a filetree 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+"allow more backspacing freedom
+set backspace=indent,eol,start
