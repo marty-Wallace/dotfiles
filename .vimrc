@@ -79,7 +79,7 @@ set showmatch
 set showcmd
 
 " Enable code folding
-set foldmethod=indent
+set foldlevel=99
 " Enabling tab for code folding
 nnoremap <tab> za
 
@@ -146,7 +146,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 set backspace=indent,eol,start
 
 "Strong encryption
-set cm=blowfish
+set cm=blowfish2
 
 "Highlight current line
 set cursorline
@@ -155,4 +155,5 @@ set cursorline
 "lines from the bottom
 set scrolloff=4
 
-
+"Remove highlighting
+nnoremap <leader>h :nohl<CR>
