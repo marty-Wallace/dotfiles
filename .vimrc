@@ -4,7 +4,7 @@
 "set leader key
 let mapleader=' '
 
-" removes backwards compatibily with vi
+"removes backwards compatibily with vi
 set nocompatible
 
 " set spacing stuff
@@ -23,20 +23,32 @@ call vundle#begin()
 
 " Vundle -- vim package manager
 Plugin 'gmarik/Vundle.vim'
+
+" Autocomplete + Snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
 " Syntax highlighting for rust
 Plugin 'wting/rust.vim'
+
 " Distraction free mode for vim
-Plugin 'junegunn/goyo.vim'
+"Plugin 'junegunn/goyo.vim'
+
 " Better code folding
 Plugin 'tmhedberg/SimpylFold'
+
 " Syntax error checking plugin
 "Plugin 'scrooloose/syntastic'
+"
 " PEP8 checking
-Plugin 'nvie/vim-flake8'
+"Plugin 'nvie/vim-flake8'
+
 " FileTree
-Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
+
 " Filetree tabs
-Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'jistr/vim-nerdtree-tabs'
+
 " Git commands in vim 
 Plugin 'tpope/vim-fugitive'
 
@@ -53,7 +65,6 @@ syntax on
 " Filetype dependent indenting
 filetype plugin indent on
 
-
 " Move up and down editor lines rather than full lines
 noremap j gj
 noremap k gk
@@ -69,8 +80,10 @@ set encoding=utf-8
 
 " Buffers screen updates, may help with scrolling lag
 set lazyredraw
+
 "display line numbers
 set number
+set relativenumber
 
 " Highlights matching brackets and quotes
 set showmatch
@@ -109,7 +122,6 @@ function! PasteToggle()
     return
 endfunction
 "}
-
 
 
 "Map my functions
@@ -157,3 +169,8 @@ set scrolloff=4
 
 "Remove highlighting
 nnoremap <leader>h :nohl<CR>
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+
