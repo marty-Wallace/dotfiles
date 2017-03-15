@@ -5,33 +5,34 @@ echoerr() { echo "$@" 1>&2; }
 
 #------------------------------
 # Adding dotfiles if they don't already exists on the system
+
 if [ ! -f "$HOME/.vimrc" ]; then 
-    ln -s ".vimrc"  "$HOME"
+	ln -s "$HOME/.dotfiles/.vimrc"  "$HOME"
 else
     echoerr ".vimrc already exists in home directory. Skipping..."
 fi
 
 if [ ! -f "$HOME/.inputrc" ]; then
-    ln -s ".inputrc" "$HOME"
+	ln -s "$HOME/.dotfiles/.inputrc" "$HOME"
 else
-    echoerr ".inputrc already exists in home directory. Skipping.."
+    echoerr "$HOME/.marty-dotfiles/.inputrc already exists in home directory. Skipping.."
 fi
 
 if [ ! -f "$HOME/.bash_aliases" ]; then
-    ln -s ".bash_aliases" "$HOME"
+	ln -s "$HOME/.dotfiles/bash_aliases" "$HOME"
 else
     echoerr ".bash_aliases already exists in home directory. Skipping.."
 fi
 
 if [ ! -f "$HOME/.bashrc" ]; then
-    ln -s ".bashrc" "$HOME"
+	ln -s "$(pwd).bashrc" "$HOME"
 else
     echoerr ".bashrc already exists in home directory. Skipping"
 fi
 
 # setup or create .bash_profile
 if [ ! -f "$HOME/.bash_profile" ]; then
-    ln -s ".bash_profile" "$HOME"
+	ln -s "$HOME/.dotfiles/.bash_profile" "$HOME"
 else
     echoerr ".bash_profile already exists. Adding info to end"
     cat >> ~/.bash_profile << "EOF"
@@ -45,6 +46,7 @@ fi
 
 [ -f $HOME/.extend.bash_profile ] && source $HOME/.extend.bash_profile
 [ -f $HOME/.bash_aliases] && source $HOME/.bash_aliases
+
 EOF
 fi
 
