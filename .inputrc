@@ -1,0 +1,4 @@
+
+#Allow selective history searching using up and down
+"\e[A": history-search-backward
+"\e[B": history-search-forward
