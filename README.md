@@ -1,23 +1,23 @@
+
+### Install 
+
+The setup script is configured to run only if you clone the repository into $HOME/.dotfiles
+
+'''
+git clone https://github.com/marty-wallace/dotfiles ~/.dotfiles
+cd .dotfiles
+chmod u+x setup.sh
+./setup.sh
+'''
+
 #### My vimrc
 
 Vim is life. Vim is love
 
-
-##### Install 
-
-First if you haven't installed vim then install it using your favourite package manager `sudo pacman -S vim` or `sudo apt-get install vim`
+My vimrc is not too crazy but comes with several plugins. Take a look at the .vimrc before running the setup script if you don;t wish to download any plugins. There is a comment explainging each line in my vimrc
 
 
-Then install Vundle if you haven't already
+#### .bash_profile + more
 
-`git clone https:://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim`
-
-Next clone this repository and link the .vimrc file to your home directory
-```
-git clone https://github.com/marty-wallace/marty-vimrc.git
-cd marty-vimrc 
-ln -s .vimrc ~/.vimrc
-```
-
-Then open up vim and run `:PluginInstall`. Vundle will install all of your plugins for you and you are ready to go. 
+There is just some basic settings in the .bash_profile 
 
