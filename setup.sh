@@ -15,17 +15,17 @@ fi
 if [ ! -f "$HOME/.inputrc" ]; then
 	ln -s "$HOME/.dotfiles/.inputrc" "$HOME"
 else
-    echoerr "$HOME/.marty-dotfiles/.inputrc already exists in home directory. Skipping.."
+    echoerr ".inputrc already exists in home directory. Skipping.."
 fi
 
 if [ ! -f "$HOME/.bash_aliases" ]; then
-	ln -s "$HOME/.dotfiles/bash_aliases" "$HOME"
+	ln -s "$HOME/.dotfiles/.bash_aliases" "$HOME"
 else
     echoerr ".bash_aliases already exists in home directory. Skipping.."
 fi
 
 if [ ! -f "$HOME/.bashrc" ]; then
-	ln -s "$(pwd).bashrc" "$HOME"
+	ln -s "$HOME/.dotfiles/.bashrc" "$HOME"
 else
     echoerr ".bashrc already exists in home directory. Skipping"
 fi
