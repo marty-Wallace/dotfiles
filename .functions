@@ -1,9 +1,28 @@
 #!/bin/bash
 
-function oksun(){
+function oksun() {
     if [ $# -gt 0 ]; then
         $1 mwallace@oksun6.okanagan.bc.ca
     else
         ssh mwallace@oksun6.okanagan.bc.ca
+    fi
+}
+
+function vpn() {
+    if [ $# -eq 0 ]; then
+        echo "You must enter the name of the vpn" 
+        return
+    fi
+    if [ $# -l 2 ]; then
+        x=up
+    else
+        x=$2
+    fi
+    if [ $x == up ]; then
+        echo "Attempting to start connection $1"
+        nmcli -p con up id "$1" iface ppp0
+    else
+        echo "Attempting to stop connection $1"
+        nmcli -p con down id "$1"
     fi
 }
