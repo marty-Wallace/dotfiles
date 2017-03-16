@@ -3,12 +3,12 @@
 
 The setup script is configured to run only if you clone the repository into $HOME/.dotfiles
 
-'''
+```
 git clone https://github.com/marty-wallace/dotfiles ~/.dotfiles
 cd .dotfiles
 chmod u+x setup.sh
 ./setup.sh
-'''
+```
 
 #### My vimrc
 
