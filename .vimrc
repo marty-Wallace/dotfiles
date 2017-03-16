@@ -27,6 +27,9 @@ Plugin 'gmarik/Vundle.vim'
 "Solarized theme
 Plugin 'altercation/vim-colors-solarized'
 
+"Multiple cursors
+Plugin 'terryma/vim-multiple-cursors'
+
 " Autocomplete + Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
