@@ -24,6 +24,9 @@ call vundle#begin()
 " Vundle -- vim package manager
 Plugin 'gmarik/Vundle.vim'
 
+"Solarized theme
+Plugin 'altercation/vim-colors-solarized'
+
 " Autocomplete + Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -174,4 +177,5 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
-colors elflord
+set background=dark
+colors solarized
