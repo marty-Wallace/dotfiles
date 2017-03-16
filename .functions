@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function oksun(){
+    if [ $# -gt 0 ]; then
+        $1 mwallace@oksun6.okanagan.bc.ca
+    else
+        ssh mwallace@oksun6.okanagan.bc.ca
+    fi
+}
