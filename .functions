@@ -13,14 +13,14 @@ function vpn() {
         echo "You must enter the name of the vpn" 
         return
     fi
-    if [ $# -l 2 ]; then
+    if [ $# -lt 2 ]; then
         x=up
     else
         x=$2
     fi
     if [ $x == up ]; then
         echo "Attempting to start connection $1"
-        nmcli -p con up id "$1" iface ppp0
+        nmcli -p con up id "$1"
     else
         echo "Attempting to stop connection $1"
         nmcli -p con down id "$1"
