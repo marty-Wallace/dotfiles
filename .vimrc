@@ -149,10 +149,17 @@ vnoremap > ><CR>gv
 vnoremap < <<CR>gv
 
 " Enable switching between screens with Ctrl+[hjkl] 
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-J>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <silent> <C-J> :wincmd j<CR>
+nnoremap <silent> <C-K> :wincmd k<CR>
+nnoremap <silent> <C-L> :wincmd l<CR>
+nnoremap <silent> <C-H> :wincmd h<CR>
+
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-J>
+"nnoremap <C-H> <C-W><C-H>
+
+
 
 " Open up file tree with Ctrl+N
 map <C-n> :NERDTreeToggle<CR>
@@ -182,3 +189,4 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 set background=dark
 colors solarized
+
