@@ -20,7 +20,7 @@ function vpn() {
     fi
     if [ $x == up ]; then
         echo "Attempting to start connection $1"
-        nmcli -p con up id "$1"
+        nmcli -p --ask con up id "$1"
     else
         echo "Attempting to stop connection $1"
         nmcli -p con down id "$1"
