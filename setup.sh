@@ -121,8 +121,10 @@ echoerr "Installing plugins in vim..."
 vim -c 'PluginInstall' -c 'qa!'
 echoerr "Vim plugins installed..."
 echoerr "Attempting to install exuberant-ctags"
-~/.vim/bundle/exuberant-ctags/configure
-~/.vim/bundle/exuberant-ctags/make install
+
+cd ~/.vim/bundle/exuberant-ctags/
+./configure
+./make install
 
 echoerr "Attempting to set terminal_settings.sh"
 vim -c "PromptlineSnapshot ~/.terminal_settings.sh"
