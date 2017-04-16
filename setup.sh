@@ -119,4 +119,11 @@ fi
 # Vundle installing vim plugins
 echoerr "Installing plugins in vim..."
 vim -c 'PluginInstall' -c 'qa!'
-echoerr "Plugins installed..."
+echoerr "Vim plugins installed..."
+echoerr "Attempting to install exuberant-ctags"
+~/.vim/bundle/exuberant-ctags/configure
+~/.vim/bundle/exuberant-ctags/make install
+
+echoerr "Attempting to set terminal_settings.sh"
+vim -c "PromptlineSnapshot ~/.terminal_settings.sh"
+source ~/.bashrc

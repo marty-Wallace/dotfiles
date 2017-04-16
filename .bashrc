@@ -32,3 +32,4 @@ colors() {
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
 set -o vi
+source ~/.terminal_settings.sh
