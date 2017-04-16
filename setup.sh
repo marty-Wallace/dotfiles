@@ -124,7 +124,7 @@ echoerr "Attempting to install exuberant-ctags"
 
 cd ~/.vim/bundle/exuberant-ctags/
 ./configure
-make install
+sudo make install
 
 echoerr "Attempting to set terminal_settings.sh"
 vim -c "PromptlineSnapshot ~/.terminal_settings.sh" -c 'qa!'
