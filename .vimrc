@@ -1,20 +1,21 @@
-" Improved vimrc file with plugins using the Vundle package manager
-" Author: Martin Wallace <Martin.V.Wallace@ieee.org>
-
-
-""""""""""""""""""""""""""""""""""""""
+" vimrc file with plugins using the Vundle package manager
+" Author: Martin Wallace <Martin.V.Wallace@ieee.org> """"""""""""""""""""""""""""""""""""""
 "    Configuration Section
 "
-" basic vim configuration stuff
+" Basic vim configuration stuff
 """""""""""""""""""""""""""""""""""""""
-set encoding=utf-8
+set encoding=utf-8 
 set nocompatible
 syntax on
+
+" Get rid of stupid error bell/noise/flash
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 "use space for leaderkey
 let mapleader=' '
 
-" fix stupid backspace issues
+" fix backspace
 set backspace=indent,eol,start
 
 " set tabbing stuff
@@ -29,18 +30,16 @@ set expandtab
 noremap j gj
 noremap k gk
 
-"Highlight current line
-set cursorline
 
 " # of screen lines to keep above and below cursor
-set scrolloff=20
-
+set scrolloff=15
+"Highlight current line
+set cursorline
 " displays current line and column
 set ruler
-set relativenumber
+" line number on current line and relative line numbers on other lines
+set number relativenumber
 
-" Never beep again
-set visualbell
 set showmatch
 set showcmd
 
@@ -53,6 +52,10 @@ nnoremap <silent> <C-K> :wincmd k<CR>
 nnoremap <silent> <C-L> :wincmd l<CR>
 nnoremap <silent> <C-H> :wincmd h<CR>
 
+if has('unix')
+    nnoremap <C-S-C> :w !xclip -selection -c<Cr>
+endif
+
 " Make indenting and unindenting in visual mode retain the selection so
 " you don't have to re-select or type gv every time.
 vnoremap > ><CR>gv
@@ -61,12 +64,10 @@ vnoremap < <<CR>gv
 "Set backspace in Visual mode to delete selection
 vnoremap <BS> d
 
-"Set triple leader to save and quit
-nnoremap <leader><leader><leader> :wq<CR>
 "Remove highlighting
 nnoremap <leader>h :nohl<CR>
 
-" Elite mode
+" Sorta like hard mode but arrow keys now have a purpose
 nnoremap <silent> <Up>     :resize +2<CR>
 nnoremap <silent> <Down>   :resize -2<CR>
 nnoremap <silent> <Left>   :vertical resize +2<CR>
@@ -80,44 +81,61 @@ nnoremap <silent> <Right>  :vertical resize -2<CR>
 filetype off                      " required first
 set rtp+=~/.vim/bundle/Vundle.vim " required second
 call vundle#begin()               " required third
-Plugin 'gmarik/Vundle.vim'        " required fourth
+    Plugin 'gmarik/Vundle.vim'    " required fourth
 
-"Appearance Plugins
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'edkolev/promptline.vim'
+    "Appearance Plugins
+    Plugin 'flazz/vim-colorschemes'
+    Plugin 'felixhummel/setcolors.vim'
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'ryanoasis/vim-devicons'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
 
-" Utility Plugins
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'junegunn/goyo.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+    " Utility Plugins
+    Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'tmhedberg/SimpylFold'
+    Plugin 'junegunn/goyo.vim'
+    Plugin 'SirVer/ultisnips'
+    Plugin 'honza/vim-snippets'
+    Plugin 'editorconfig/editorconfig-vim'
+    Plugin 'vim-syntastic/syntastic'
 
-" Tag Plugins
-Plugin 'jakedouglas/exuberant-ctags'
-Plugin 'majutsushi/tagbar'
+    " Tag Plugins
+    Plugin 'jakedouglas/exuberant-ctags'
+    Plugin 'majutsushi/tagbar'
 
-" FileTree Plugins
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+    " FileTree Plugins
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'jistr/vim-nerdtree-tabs'
 
-"Git plugins
-Plugin 'tpope/vim-fugitive'
+    "Git plugins
+    Plugin 'tpope/vim-fugitive'
 
-"Python Plugins
-Plugin 'nvie/vim-flake8'
+    "Python Plugins
+    Plugin 'nvie/vim-flake8'
 
-" Rust Plugins
-Plugin 'wting/rust.vim'
+    " Rust Plugins
+    Plugin 'wting/rust.vim'
+
+    " Javascript Plugins
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'mxw/vim-jsx'
+
+    " Solidity Plugins
+    Plugin 'tomlion/vim-solidity'
 
 call vundle#end()
 filetype on
 filetype plugin indent on
 
 
+""""""""""""""""""""""""""""""""""""""
+"   Goyo Configuration Section
+"
+""""""""""""""""""""""""""""""""""""""
+map <C-_> :Goyo<CR>
+let g:goyo_width="95%"
+let g:goyo_height="95%"
 
 
 """"""""""""""""""""""""""""""""""""""
@@ -125,7 +143,7 @@ filetype plugin indent on
 "
 """"""""""""""""""""""""""""""""""""""
 " Ignore certain files in nerdtree
-let NERDTreeIgnore=['\.pyc$', '\~$']
+let NERDTreeIgnore=['\.pyc$', 'bin', 'node_modules',  '\~$']
 
 " Close vim if only window open is a filetree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -142,12 +160,17 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
 
+""""""""""""""""""""""""""""""""""""""
+"   Tagbar Configuration Section
+"
+""""""""""""""""""""""""""""""""""""""
+map <C-t> :TagbarToggle<CR>
+
 
 """"""""""""""""""""""""""""""""""""""
 "   SimpylFold Configuration Section
 "
 """"""""""""""""""""""""""""""""""""""
-
 " Enable code folding
 set foldlevel=99
 
@@ -156,28 +179,15 @@ nnoremap <tab><tab> za
 
 
 """"""""""""""""""""""""""""""""""""""
-"   tagbar Configuration Section
-"
-""""""""""""""""""""""""""""""""""""""
-"let g:tagbar_ctags_bin="~/.vim/bundle/exuberant-ctags/"
-
-
-
-""""""""""""""""""""""""""""""""""""""
 "   Custom functions section
 "
 """"""""""""""""""""""""""""""""""""""
-
-"{ Open up a URL in firefox
 function! Browser ()
    let line = getline (".")
-   let line = matchstr (line, "http[^   ]*")
+   let line = matchstr (line, "http[^   \"\']*")
    exec "!firefox ".line
 endfunction
 
-"}
-
-"{ Toggle paste mode
 let paste_mode = 0
 function! PasteToggle()
     if g:paste_mode == 0
@@ -189,10 +199,11 @@ function! PasteToggle()
     endif
     return
 endfunction
-"}
 
 " Enable running the current python script with F9
 autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+
+"autocmd FileType javascript setlocal tabstop=2 shiftwidth=2
 
 "Map my functions
 nnoremap <leader>b :call Browser()<CR>
@@ -200,18 +211,32 @@ nnoremap <leader>p :call PasteToggle()<CR>
 
 
 
+""""""""""""""""""""""""""""""""""""""
+"   Rust Configuration section
+"
+""""""""""""""""""""""""""""""""""""""
+let g:tagbar_type_rust = {
+            \ 'ctagstype' : 'rust',
+            \ 'kinds' : [
+            \'T:types,type definitions',
+            \'f:functions,function definitions',
+            \'g:enum,enumeration names',
+            \'s:structure names',
+            \'m:modules,module names',
+            \'c:consts,static constants',
+            \'t:traits,traits',
+            \'i:impls,trait implementations',
+            \]
+            \}
 
 
 """"""""""""""""""""""""""""""""""""""
 "   Ultisnips Configuration section
 "
 """"""""""""""""""""""""""""""""""""""
-
-" ultisnips mapping
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
-
 
 
 """"""""""""""""""""""""""""""""""""""
@@ -220,31 +245,67 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 """"""""""""""""""""""""""""""""""""""
 set laststatus=2
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#syntastic#enabled = 1
 
 
 
 """"""""""""""""""""""""""""""""""""""
-"   Promptline.vim Configuration section
+"   Syntastic Configuration section
 "
 """"""""""""""""""""""""""""""""""""""
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['flake8']
 
-let g:promptline_preset = 'full'
 
-" sections (a, b, c, x, y, z, warn) are optional
-let g:promptline_preset = {
-        \'a' : [ promptline#slices#host() ],
-        \'b' : [ promptline#slices#user() ],
-        \'c' : [ promptline#slices#cwd({ 'dir_limit': 2}) ],
-        \'y' : [ promptline#slices#vcs_branch() ],
-        \'warn' : [ promptline#slices#last_exit_code() ]}
+let g:syntastic_error_symbol = '⚡'
+let g:syntastic_style_error_symbol = '⛔'
+let g:syntastic_warning_symbol = 'ℹ'
+let g:syntastic_style_warning_symbol = '🐭'
+
+" UTF-8 symbols that show up nice in vim 
+" 🐮 ☘ ⛴  🌒 🌗 🌕 🌘 ⛈  ⚡🃏 ☎ 
+" ✉ ✂ ⚙ ⛔☢ ✡ ☪ ☮ ⛎ ⏏ ❎ ⁉ ‼ 🆒
+" ⛑ 🐵 🐭 🌐 ⛰  ℹ 🙃 ⛳
+
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+    lclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open syntastic error location panel
+        Errors
+    endif
+endfunction
+
+nnoremap <silent> <C-e> :<C-u>call ToggleErrors()<CR>
+
+
+""""""""""""""""""""""""""""""""""""""
+"   JSX Configuration section
+"
+""""""""""""""""""""""""""""""""""""""
+let g:jsx_ext_required = 0
 
 
 """"""""""""""""""""""""""""""""""""""
 "    Appearance Section
 "
 """"""""""""""""""""""""""""""""""""""
+if has("win32") || has("win64")
+    set guifont=InputMono_Medium:h10:cANSI:qDRAFT
+else
+    set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+endif
 
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+autocmd VimEnter * SetColors xoria256 Benokai 256-jungle Tomorrow-Night-Eighties 256-grayvim lucius
+
 set background=dark
-colors solarized
+colorscheme lucius
 
+" This will set the matching parens colors to be magenta and bold with no background
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+highlight Comment cterm=italic

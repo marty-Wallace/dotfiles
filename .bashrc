@@ -33,3 +33,6 @@ colors() {
 
 set -o vi
 source ~/.terminal_settings.sh
+
+# added by travis gem
+[ -f /home/marty/.travis/travis.sh ] && source /home/marty/.travis/travis.sh
